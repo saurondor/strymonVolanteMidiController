@@ -1,0 +1,378 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.8.0_192" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundlePackage": "com.strymon.volante"
+	"i18n.bundleName": "volante"
+	"i18n.keyPrefix": "JVolanteConsole"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "10dlu, labelcompgap, 40dlu, labelcompgap, 40dlu, labelcompgap, 40dlu, labelcompgap, 50dlu, labelcompgap, 50dlu, labelcompgap, 50dlu, labelcompgap, 50dlu, labelcompgap, 50dlu, labelcompgap, 50dlu, labelcompgap, 50dlu, labelcompgap, 50dlu"
+			"$rowSpecs": "20dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default, linegap, 51dlu, linegap, default, linegap, default, linegap, default, linegap, default, linegap, default"
+		} ) {
+			name: "this"
+			"$sizePolicy": 1
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": new FormMessage( null, "JVolanteConsole.label6.text" )
+				"font": new java.awt.Font( "Tahoma", 1, 16 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridWidth": 11
+				"gridY": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label16"
+				"text": new FormMessage( null, "JVolanteConsole.label16.text" )
+				"font": new java.awt.Font( "Tahoma", 1, 16 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 15
+				"gridWidth": 5
+				"gridY": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label11"
+				"text": new FormMessage( null, "JVolanteConsole.label11.text" )
+				"font": new java.awt.Font( "Tahoma", 1, 16 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 21
+				"gridWidth": 3
+				"gridY": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label14"
+				"text": new FormMessage( null, "JVolanteConsole.label14.text" )
+				"horizontalAlignment": 0
+				"font": &Font0 new java.awt.Font( "Tahoma", 1, 11 )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 5
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator1"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 5
+				"gridY": 5
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label15"
+				"text": new FormMessage( null, "JVolanteConsole.label15.text" )
+				"horizontalAlignment": 0
+				"font": #Font0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 5
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator2"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 11
+				"gridY": 5
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator3"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 15
+				"gridY": 5
+				"gridWidth": 5
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator4"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 21
+				"gridY": 5
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "halfSpeedRadioButton"
+				"text": new FormMessage( null, "JVolanteConsole.halfSpeedRadioButton.text" )
+				"$buttonGroup": new FormReference( "buttonGroup1" )
+				"selected": true
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "halfSpeedRadioButtonItemStateChanged", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "normalSpeedRadioButton"
+				"text": new FormMessage( null, "JVolanteConsole.normalSpeedRadioButton.text" )
+				"$buttonGroup": new FormReference( "buttonGroup1" )
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "normalSpeedRadioButtonItemStateChanged", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 5
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "doubleSpeedRadioButton"
+				"text": new FormMessage( null, "JVolanteConsole.doubleSpeedRadioButton.text" )
+				"$buttonGroup": new FormReference( "buttonGroup1" )
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "doubleSpeedRadioButtonItemStateChanged", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton1"
+				"text": new FormMessage( null, "JVolanteConsole.radioButton1.text" )
+				"$buttonGroup": new FormReference( "buttonGroup2" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton2"
+				"text": new FormMessage( null, "JVolanteConsole.radioButton2.text" )
+				"$buttonGroup": new FormReference( "buttonGroup2" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 11
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton3"
+				"text": new FormMessage( null, "JVolanteConsole.radioButton3.text" )
+				"$buttonGroup": new FormReference( "buttonGroup2" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 13
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": new FormMessage( null, "JVolanteConsole.label1.text" )
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Tahoma", 1, 12 )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 9
+				"gridWidth": 5
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label9"
+				"text": new FormMessage( null, "JVolanteConsole.label9.text" )
+				"font": &Font1 new java.awt.Font( "Tahoma", 1, 12 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": new FormMessage( null, "JVolanteConsole.label8.text" )
+				"font": #Font1
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 11
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label10"
+				"text": new FormMessage( null, "JVolanteConsole.label10.text" )
+				"font": #Font1
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 13
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": new FormMessage( null, "JVolanteConsole.label4.text" )
+				"font": &Font2 new java.awt.Font( "Tahoma", 1, 12 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 15
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": new FormMessage( null, "JVolanteConsole.label2.text" )
+				"font": #Font2
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 17
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": new FormMessage( null, "JVolanteConsole.label3.text" )
+				"font": #Font2
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 19
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label13"
+				"text": new FormMessage( null, "JVolanteConsole.label13.text" )
+				"font": #Font2
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 21
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label12"
+				"text": new FormMessage( null, "JVolanteConsole.label12.text" )
+				"font": #Font2
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 23
+				"gridY": 9
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "recLevelSlider"
+				"maximum": 127
+				"value": 64
+				"orientation": 1
+				"paintTicks": true
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "recLevelSliderPropertyChange", true ) )
+				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "recLevelSliderStateChanged", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 5
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": new FormMessage( null, "JVolanteConsole.label5.text" )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 11
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider1"
+				"orientation": 1
+				"maximum": 127
+				"minorTickSpacing": 1
+				"paintTicks": true
+				"majorTickSpacing": 10
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider2"
+				"orientation": 1
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				"maximum": 127
+				"paintTicks": true
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 11
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider3"
+				"orientation": 1
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				"maximum": 127
+				"paintTicks": true
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 13
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider4"
+				"orientation": 1
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				"maximum": 127
+				"paintTicks": true
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 15
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider5"
+				"orientation": 1
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				"maximum": 127
+				"paintTicks": true
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 17
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider6"
+				"orientation": 1
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				"maximum": 127
+				"paintTicks": true
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 19
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider7"
+				"orientation": 1
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				"maximum": 127
+				"paintTicks": true
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 21
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider8"
+				"orientation": 1
+				"minorTickSpacing": 1
+				"majorTickSpacing": 10
+				"maximum": 127
+				"paintTicks": true
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 23
+				"gridY": 11
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": new FormMessage( null, "JVolanteConsole.label7.text" )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 15
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "timeLabel"
+				"text": new FormMessage( null, "JVolanteConsole.timeLabel.text" )
+				"font": new java.awt.Font( "Source Code Pro Black", 0, 26 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 17
+				"gridWidth": 5
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 5 )
+			"size": new java.awt.Dimension( 915, 385 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "buttonGroup1"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 1035, 10 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "buttonGroup2"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 1035, 65 )
+		} )
+	}
+}
