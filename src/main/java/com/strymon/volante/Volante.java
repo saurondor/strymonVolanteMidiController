@@ -83,6 +83,22 @@ public class Volante implements Runnable {
 
 	private Integer speed;
 	private Integer time;
+	private Integer playbackHead1; // on-off
+	private Integer playbackHead2; // on-off
+	private Integer playbackHead3; // on-off
+	private Integer playbackHead4; // on-off
+	private Integer levelHead1;
+	private Integer levelHead2;
+	private Integer levelHead3;
+	private Integer levelHead4;
+	private Integer panHead1;
+	private Integer panHead2;
+	private Integer panHead3;
+	private Integer panHead4;
+	private Integer feedbackHead1; // on-off
+	private Integer feedbackHead2; // on-off
+	private Integer feedbackHead3; // on-off
+	private Integer feedbackHead4; // on-off
 
 	/**
 	 * Updates the speed setting and sends message
@@ -202,5 +218,36 @@ public class Volante implements Runnable {
 		if (connected) {
 			rcvr.send(msg, timeStamp);
 		}
+	}
+
+	public void updateLevelHead1(int value) throws InvalidMidiDataException {
+		levelHead1 = value;
+		ShortMessage msg = new ShortMessage();
+		msg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_HEAD_1_LEVEL, levelHead1);
+		this.sendMsg(msg);
+	}
+
+	public void updateLevelHead2(int value) throws InvalidMidiDataException {
+		levelHead2 = value;
+		ShortMessage msg = new ShortMessage();
+		msg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_HEAD_2_LEVEL, levelHead2);
+		this.sendMsg(msg);
+
+	}
+
+	public void updateLevelHead3(int value) throws InvalidMidiDataException {
+		levelHead3 = value;
+		ShortMessage msg = new ShortMessage();
+		msg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_HEAD_3_LEVEL, levelHead3);
+		this.sendMsg(msg);
+
+	}
+
+	public void updateLevelHead4(int value) throws InvalidMidiDataException {
+		levelHead4 = value;
+		ShortMessage msg = new ShortMessage();
+		msg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_HEAD_4_LEVEL, levelHead4);
+		this.sendMsg(msg);
+
 	}
 }
