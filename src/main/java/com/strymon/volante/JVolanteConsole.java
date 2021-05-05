@@ -32,7 +32,7 @@ public class JVolanteConsole extends JFrame {
 
 	public JVolanteConsole() {
 		initComponents();
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -62,38 +62,57 @@ public class JVolanteConsole extends JFrame {
 		setTime();
 	}
 
+	private void setSpeed() {
+		int speed = 0;
+		int value = recLevelSlider.getValue();
+		if (halfSpeedRadioButton.isSelected()) {
+			speed = 2;
+		}
+		if (normalSpeedRadioButton.isSelected()) {
+			speed = 3;
+		}
+		if (doubleSpeedRadioButton.isSelected()) {
+			speed = 1;
+		}
+		try {
+			updateSpeedSlider(value);
+			volante.updateSpeed(speed);
+		} catch (InvalidMidiDataException e) {
+			JOptionPane.showMessageDialog(this, "Couldn't update speed. " + e.getMessage(), "MIDI Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void updateSpeedSlider(int value) {
+		double range;
+		double maxRange = 4000d;
+		double minRange = 400d;
+		double slider = Integer.valueOf(value).doubleValue();
+		if (halfSpeedRadioButton.isSelected()) {
+			maxRange = 4000d;
+			minRange = 400d;
+		}
+		if (normalSpeedRadioButton.isSelected()) {
+			maxRange = 2000d;
+			minRange = 200d;
+		}
+		if (doubleSpeedRadioButton.isSelected()) {
+			maxRange = 1000d;
+			minRange = 100d;
+		}
+		maxTimeRangeLabel.setText(String.format("%,.0f ms", maxRange));
+		minTimeRangeLabel.setText(String.format("%,.0f ms", minRange));
+		range = maxRange - minRange;
+		double delay = range * (slider / 127d) + minRange;
+		timeLabel.setText(Double.valueOf(delay).intValue() + " ms");
+	}
+
 	private void setTime() {
 		try {
 			int value = recLevelSlider.getValue();
-			ShortMessage speedMsg = new ShortMessage();
-			if (halfSpeedRadioButton.isSelected()) {
-				double slider = Integer.valueOf(value).doubleValue();
-				double range = 4000d - 400d;
-				double delay = range * (slider / 127d) + 400d;
-				timeLabel.setText(Double.valueOf(delay).intValue() + " ms");
-				speedMsg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_SPEED, 2);
-				volante.sendMsg(speedMsg);
-			}
-			if (normalSpeedRadioButton.isSelected()) {
-				double slider = Integer.valueOf(value).doubleValue();
-				double range = 2000d - 200d;
-				double delay = range * (slider / 127d) + 200d;
-				timeLabel.setText(Double.valueOf(delay).intValue() + " ms");
-				speedMsg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_SPEED, 3);
-				volante.sendMsg(speedMsg);
-			}
-			if (doubleSpeedRadioButton.isSelected()) {
-				double slider = Integer.valueOf(value).doubleValue();
-				double range = 1000d - 100d;
-				double delay = range * (slider / 127d) + 100d;
-				timeLabel.setText(Double.valueOf(delay).intValue() + " ms");
-				speedMsg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_SPEED, 1);
-				volante.sendMsg(speedMsg);
-			}
-
-			speedMsg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_TIME, value);
 			logger.info("Sent speed msg " + value);
-			volante.sendMsg(speedMsg);
+			updateSpeedSlider(value);
+			volante.updateTime(value);
 		} catch (InvalidMidiDataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,19 +121,19 @@ public class JVolanteConsole extends JFrame {
 
 	private void halfSpeedRadioButtonItemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			setTime();
+			setSpeed();
 		}
 	}
 
 	private void normalSpeedRadioButtonItemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			setTime();
+			setSpeed();
 		}
 	}
 
 	private void doubleSpeedRadioButtonItemStateChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
-			setTime();
+			setSpeed();
 		}
 	}
 
@@ -151,7 +170,7 @@ public class JVolanteConsole extends JFrame {
 		label13 = new JLabel();
 		label12 = new JLabel();
 		recLevelSlider = new JSlider();
-		label5 = new JLabel();
+		maxTimeRangeLabel = new JLabel();
 		slider1 = new JSlider();
 		slider2 = new JSlider();
 		slider3 = new JSlider();
@@ -160,41 +179,43 @@ public class JVolanteConsole extends JFrame {
 		slider6 = new JSlider();
 		slider7 = new JSlider();
 		slider8 = new JSlider();
-		label7 = new JLabel();
+		minTimeRangeLabel = new JLabel();
 		timeLabel = new JLabel();
+		label17 = new JLabel();
+		slider9 = new JSlider();
+		slider10 = new JSlider();
 
-		//======== this ========
+		// ======== this ========
 		Container contentPane = getContentPane();
-		contentPane.setLayout(new FormLayout(
-			"10dlu, 3*($lcgap, 40dlu), 8*($lcgap, 50dlu)",
-			"20dlu, 5*($lgap, default), $lgap, 51dlu, 5*($lgap, default)"));
+		contentPane.setLayout(new FormLayout("10dlu, 3*($lcgap, 40dlu), 8*($lcgap, 50dlu)",
+				"20dlu, 5*($lgap, default), $lgap, 51dlu, 5*($lgap, default)"));
 
-		//---- label6 ----
+		// ---- label6 ----
 		label6.setText(bundle.getString("JVolanteConsole.label6.text"));
 		label6.setFont(new Font("Tahoma", Font.BOLD, 16));
 		label6.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label6, CC.xywh(3, 3, 11, 1));
 
-		//---- label16 ----
+		// ---- label16 ----
 		label16.setText(bundle.getString("JVolanteConsole.label16.text"));
 		label16.setFont(new Font("Tahoma", Font.BOLD, 16));
 		label16.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label16, CC.xywh(15, 3, 5, 1));
 
-		//---- label11 ----
+		// ---- label11 ----
 		label11.setText(bundle.getString("JVolanteConsole.label11.text"));
 		label11.setFont(new Font("Tahoma", Font.BOLD, 16));
 		label11.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label11, CC.xywh(21, 3, 3, 1));
 
-		//---- label14 ----
+		// ---- label14 ----
 		label14.setText(bundle.getString("JVolanteConsole.label14.text"));
 		label14.setHorizontalAlignment(SwingConstants.CENTER);
 		label14.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(label14, CC.xy(3, 5));
 		contentPane.add(separator1, CC.xywh(5, 5, 3, 1));
 
-		//---- label15 ----
+		// ---- label15 ----
 		label15.setText(bundle.getString("JVolanteConsole.label15.text"));
 		label15.setHorizontalAlignment(SwingConstants.CENTER);
 		label15.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -203,7 +224,7 @@ public class JVolanteConsole extends JFrame {
 		contentPane.add(separator3, CC.xywh(15, 5, 5, 1));
 		contentPane.add(separator4, CC.xywh(21, 5, 3, 1));
 
-		//---- halfSpeedRadioButton ----
+		// ---- halfSpeedRadioButton ----
 		halfSpeedRadioButton.setText(bundle.getString("JVolanteConsole.halfSpeedRadioButton.text"));
 		halfSpeedRadioButton.setSelected(true);
 		halfSpeedRadioButton.addItemListener(new ItemListener() {
@@ -214,7 +235,7 @@ public class JVolanteConsole extends JFrame {
 		});
 		contentPane.add(halfSpeedRadioButton, CC.xy(3, 7));
 
-		//---- normalSpeedRadioButton ----
+		// ---- normalSpeedRadioButton ----
 		normalSpeedRadioButton.setText(bundle.getString("JVolanteConsole.normalSpeedRadioButton.text"));
 		normalSpeedRadioButton.addItemListener(new ItemListener() {
 			@Override
@@ -224,7 +245,7 @@ public class JVolanteConsole extends JFrame {
 		});
 		contentPane.add(normalSpeedRadioButton, CC.xy(5, 7));
 
-		//---- doubleSpeedRadioButton ----
+		// ---- doubleSpeedRadioButton ----
 		doubleSpeedRadioButton.setText(bundle.getString("JVolanteConsole.doubleSpeedRadioButton.text"));
 		doubleSpeedRadioButton.addItemListener(new ItemListener() {
 			@Override
@@ -234,73 +255,73 @@ public class JVolanteConsole extends JFrame {
 		});
 		contentPane.add(doubleSpeedRadioButton, CC.xy(7, 7));
 
-		//---- radioButton1 ----
+		// ---- radioButton1 ----
 		radioButton1.setText(bundle.getString("JVolanteConsole.radioButton1.text"));
 		contentPane.add(radioButton1, CC.xy(9, 7));
 
-		//---- radioButton2 ----
+		// ---- radioButton2 ----
 		radioButton2.setText(bundle.getString("JVolanteConsole.radioButton2.text"));
 		contentPane.add(radioButton2, CC.xy(11, 7));
 
-		//---- radioButton3 ----
+		// ---- radioButton3 ----
 		radioButton3.setText(bundle.getString("JVolanteConsole.radioButton3.text"));
 		contentPane.add(radioButton3, CC.xy(13, 7));
 
-		//---- label1 ----
+		// ---- label1 ----
 		label1.setText(bundle.getString("JVolanteConsole.label1.text"));
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
 		label1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		contentPane.add(label1, CC.xywh(3, 9, 5, 1));
 
-		//---- label9 ----
+		// ---- label9 ----
 		label9.setText(bundle.getString("JVolanteConsole.label9.text"));
 		label9.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label9.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label9, CC.xy(9, 9));
 
-		//---- label8 ----
+		// ---- label8 ----
 		label8.setText(bundle.getString("JVolanteConsole.label8.text"));
 		label8.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label8.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label8, CC.xy(11, 9));
 
-		//---- label10 ----
+		// ---- label10 ----
 		label10.setText(bundle.getString("JVolanteConsole.label10.text"));
 		label10.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label10.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label10, CC.xy(13, 9));
 
-		//---- label4 ----
+		// ---- label4 ----
 		label4.setText(bundle.getString("JVolanteConsole.label4.text"));
 		label4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label4.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label4, CC.xy(15, 9));
 
-		//---- label2 ----
+		// ---- label2 ----
 		label2.setText(bundle.getString("JVolanteConsole.label2.text"));
 		label2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label2, CC.xy(17, 9));
 
-		//---- label3 ----
+		// ---- label3 ----
 		label3.setText(bundle.getString("JVolanteConsole.label3.text"));
 		label3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label3.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label3, CC.xy(19, 9));
 
-		//---- label13 ----
+		// ---- label13 ----
 		label13.setText(bundle.getString("JVolanteConsole.label13.text"));
 		label13.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label13.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label13, CC.xy(21, 9));
 
-		//---- label12 ----
+		// ---- label12 ----
 		label12.setText(bundle.getString("JVolanteConsole.label12.text"));
 		label12.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label12.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label12, CC.xy(23, 9));
 
-		//---- recLevelSlider ----
+		// ---- recLevelSlider ----
 		recLevelSlider.setMaximum(127);
 		recLevelSlider.setValue(64);
 		recLevelSlider.setOrientation(SwingConstants.VERTICAL);
@@ -321,12 +342,12 @@ public class JVolanteConsole extends JFrame {
 		});
 		contentPane.add(recLevelSlider, CC.xywh(5, 11, 1, 5));
 
-		//---- label5 ----
-		label5.setText(bundle.getString("JVolanteConsole.label5.text"));
-		label5.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(label5, CC.xy(7, 11));
+		// ---- maxTimeRangeLabel ----
+		maxTimeRangeLabel.setText(bundle.getString("JVolanteConsole.maxTimeRangeLabel.text"));
+		maxTimeRangeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(maxTimeRangeLabel, CC.xy(7, 11));
 
-		//---- slider1 ----
+		// ---- slider1 ----
 		slider1.setOrientation(SwingConstants.VERTICAL);
 		slider1.setMaximum(127);
 		slider1.setMinorTickSpacing(1);
@@ -334,7 +355,7 @@ public class JVolanteConsole extends JFrame {
 		slider1.setMajorTickSpacing(10);
 		contentPane.add(slider1, CC.xywh(9, 11, 1, 5));
 
-		//---- slider2 ----
+		// ---- slider2 ----
 		slider2.setOrientation(SwingConstants.VERTICAL);
 		slider2.setMinorTickSpacing(1);
 		slider2.setMajorTickSpacing(10);
@@ -342,7 +363,7 @@ public class JVolanteConsole extends JFrame {
 		slider2.setPaintTicks(true);
 		contentPane.add(slider2, CC.xywh(11, 11, 1, 5));
 
-		//---- slider3 ----
+		// ---- slider3 ----
 		slider3.setOrientation(SwingConstants.VERTICAL);
 		slider3.setMinorTickSpacing(1);
 		slider3.setMajorTickSpacing(10);
@@ -350,7 +371,7 @@ public class JVolanteConsole extends JFrame {
 		slider3.setPaintTicks(true);
 		contentPane.add(slider3, CC.xywh(13, 11, 1, 5));
 
-		//---- slider4 ----
+		// ---- slider4 ----
 		slider4.setOrientation(SwingConstants.VERTICAL);
 		slider4.setMinorTickSpacing(1);
 		slider4.setMajorTickSpacing(10);
@@ -358,7 +379,7 @@ public class JVolanteConsole extends JFrame {
 		slider4.setPaintTicks(true);
 		contentPane.add(slider4, CC.xywh(15, 11, 1, 5));
 
-		//---- slider5 ----
+		// ---- slider5 ----
 		slider5.setOrientation(SwingConstants.VERTICAL);
 		slider5.setMinorTickSpacing(1);
 		slider5.setMajorTickSpacing(10);
@@ -366,7 +387,7 @@ public class JVolanteConsole extends JFrame {
 		slider5.setPaintTicks(true);
 		contentPane.add(slider5, CC.xywh(17, 11, 1, 5));
 
-		//---- slider6 ----
+		// ---- slider6 ----
 		slider6.setOrientation(SwingConstants.VERTICAL);
 		slider6.setMinorTickSpacing(1);
 		slider6.setMajorTickSpacing(10);
@@ -374,7 +395,7 @@ public class JVolanteConsole extends JFrame {
 		slider6.setPaintTicks(true);
 		contentPane.add(slider6, CC.xywh(19, 11, 1, 5));
 
-		//---- slider7 ----
+		// ---- slider7 ----
 		slider7.setOrientation(SwingConstants.VERTICAL);
 		slider7.setMinorTickSpacing(1);
 		slider7.setMajorTickSpacing(10);
@@ -382,7 +403,7 @@ public class JVolanteConsole extends JFrame {
 		slider7.setPaintTicks(true);
 		contentPane.add(slider7, CC.xywh(21, 11, 1, 5));
 
-		//---- slider8 ----
+		// ---- slider8 ----
 		slider8.setOrientation(SwingConstants.VERTICAL);
 		slider8.setMinorTickSpacing(1);
 		slider8.setMajorTickSpacing(10);
@@ -390,26 +411,47 @@ public class JVolanteConsole extends JFrame {
 		slider8.setPaintTicks(true);
 		contentPane.add(slider8, CC.xywh(23, 11, 1, 5));
 
-		//---- label7 ----
-		label7.setText(bundle.getString("JVolanteConsole.label7.text"));
-		label7.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(label7, CC.xy(7, 15));
+		// ---- minTimeRangeLabel ----
+		minTimeRangeLabel.setText(bundle.getString("JVolanteConsole.minTimeRangeLabel.text"));
+		minTimeRangeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(minTimeRangeLabel, CC.xy(7, 15));
 
-		//---- timeLabel ----
+		// ---- timeLabel ----
 		timeLabel.setText(bundle.getString("JVolanteConsole.timeLabel.text"));
 		timeLabel.setFont(new Font("Source Code Pro Black", Font.PLAIN, 26));
 		timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(timeLabel, CC.xywh(3, 17, 5, 1));
-		setSize(915, 385);
+
+		// ---- label17 ----
+		label17.setText(bundle.getString("JVolanteConsole.label17.text"));
+		label17.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label17.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(label17, CC.xywh(3, 19, 11, 1));
+
+		// ---- slider9 ----
+		slider9.setOrientation(SwingConstants.VERTICAL);
+		slider9.setMaximum(127);
+		slider9.setMinorTickSpacing(1);
+		slider9.setPaintTicks(true);
+		slider9.setMajorTickSpacing(10);
+		contentPane.add(slider9, CC.xy(3, 21));
+
+		// ---- slider10 ----
+		slider10.setMaximum(127);
+		slider10.setMinorTickSpacing(1);
+		slider10.setPaintTicks(true);
+		slider10.setMajorTickSpacing(10);
+		contentPane.add(slider10, CC.xy(3, 23));
+		setSize(915, 460);
 		setLocationRelativeTo(getOwner());
 
-		//---- buttonGroup1 ----
+		// ---- buttonGroup1 ----
 		ButtonGroup buttonGroup1 = new ButtonGroup();
 		buttonGroup1.add(halfSpeedRadioButton);
 		buttonGroup1.add(normalSpeedRadioButton);
 		buttonGroup1.add(doubleSpeedRadioButton);
 
-		//---- buttonGroup2 ----
+		// ---- buttonGroup2 ----
 		ButtonGroup buttonGroup2 = new ButtonGroup();
 		buttonGroup2.add(radioButton1);
 		buttonGroup2.add(radioButton2);
@@ -443,7 +485,7 @@ public class JVolanteConsole extends JFrame {
 	private JLabel label13;
 	private JLabel label12;
 	private JSlider recLevelSlider;
-	private JLabel label5;
+	private JLabel maxTimeRangeLabel;
 	private JSlider slider1;
 	private JSlider slider2;
 	private JSlider slider3;
@@ -452,7 +494,10 @@ public class JVolanteConsole extends JFrame {
 	private JSlider slider6;
 	private JSlider slider7;
 	private JSlider slider8;
-	private JLabel label7;
+	private JLabel minTimeRangeLabel;
 	private JLabel timeLabel;
+	private JLabel label17;
+	private JSlider slider9;
+	private JSlider slider10;
 	// JFormDesigner - End of variables declaration //GEN-END:variables
 }

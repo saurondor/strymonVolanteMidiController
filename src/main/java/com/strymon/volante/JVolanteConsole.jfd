@@ -16,7 +16,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label6"
 				"text": new FormMessage( null, "JVolanteConsole.label6.text" )
-				"font": new java.awt.Font( "Tahoma", 1, 16 )
+				"font": &Font0 new java.awt.Font( "Tahoma", 1, 16 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
@@ -47,7 +47,7 @@ new FormModel {
 				name: "label14"
 				"text": new FormMessage( null, "JVolanteConsole.label14.text" )
 				"horizontalAlignment": 0
-				"font": &Font0 new java.awt.Font( "Tahoma", 1, 11 )
+				"font": &Font1 new java.awt.Font( "Tahoma", 1, 11 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 5
@@ -63,7 +63,7 @@ new FormModel {
 				name: "label15"
 				"text": new FormMessage( null, "JVolanteConsole.label15.text" )
 				"horizontalAlignment": 0
-				"font": #Font0
+				"font": #Font1
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
 				"gridY": 5
@@ -154,7 +154,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label9"
 				"text": new FormMessage( null, "JVolanteConsole.label9.text" )
-				"font": &Font1 new java.awt.Font( "Tahoma", 1, 12 )
+				"font": &Font2 new java.awt.Font( "Tahoma", 1, 12 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
@@ -163,7 +163,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label8"
 				"text": new FormMessage( null, "JVolanteConsole.label8.text" )
-				"font": #Font1
+				"font": #Font2
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 11
@@ -172,7 +172,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label10"
 				"text": new FormMessage( null, "JVolanteConsole.label10.text" )
-				"font": #Font1
+				"font": #Font2
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 13
@@ -181,7 +181,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label4"
 				"text": new FormMessage( null, "JVolanteConsole.label4.text" )
-				"font": &Font2 new java.awt.Font( "Tahoma", 1, 12 )
+				"font": &Font3 new java.awt.Font( "Tahoma", 1, 12 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 15
@@ -190,7 +190,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": new FormMessage( null, "JVolanteConsole.label2.text" )
-				"font": #Font2
+				"font": #Font3
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 17
@@ -199,7 +199,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label3"
 				"text": new FormMessage( null, "JVolanteConsole.label3.text" )
-				"font": #Font2
+				"font": #Font3
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 19
@@ -208,7 +208,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label13"
 				"text": new FormMessage( null, "JVolanteConsole.label13.text" )
-				"font": #Font2
+				"font": #Font3
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 21
@@ -217,7 +217,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label12"
 				"text": new FormMessage( null, "JVolanteConsole.label12.text" )
-				"font": #Font2
+				"font": #Font3
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 23
@@ -239,8 +239,8 @@ new FormModel {
 				"gridHeight": 5
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label5"
-				"text": new FormMessage( null, "JVolanteConsole.label5.text" )
+				name: "maxTimeRangeLabel"
+				"text": new FormMessage( null, "JVolanteConsole.maxTimeRangeLabel.text" )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
@@ -343,8 +343,8 @@ new FormModel {
 				"gridHeight": 5
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label7"
-				"text": new FormMessage( null, "JVolanteConsole.label7.text" )
+				name: "minTimeRangeLabel"
+				"text": new FormMessage( null, "JVolanteConsole.minTimeRangeLabel.text" )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
@@ -360,9 +360,40 @@ new FormModel {
 				"gridY": 17
 				"gridWidth": 5
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label17"
+				"text": new FormMessage( null, "JVolanteConsole.label17.text" )
+				"font": #Font0
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 19
+				"gridWidth": 11
+				"gridX": 3
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider9"
+				"orientation": 1
+				"maximum": 127
+				"minorTickSpacing": 1
+				"paintTicks": true
+				"majorTickSpacing": 10
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 21
+				"gridX": 3
+			} )
+			add( new FormComponent( "javax.swing.JSlider" ) {
+				name: "slider10"
+				"maximum": 127
+				"minorTickSpacing": 1
+				"paintTicks": true
+				"majorTickSpacing": 10
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 23
+				"gridX": 3
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 5 )
-			"size": new java.awt.Dimension( 915, 385 )
+			"size": new java.awt.Dimension( 915, 460 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroup1"

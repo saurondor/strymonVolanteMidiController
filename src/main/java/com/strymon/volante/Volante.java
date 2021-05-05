@@ -81,6 +81,35 @@ public class Volante implements Runnable {
 	Receiver rcvr;
 	boolean connected = false;
 
+	private Integer speed;
+	private Integer time;
+
+	/**
+	 * Updates the speed setting and sends message
+	 * 
+	 * @param value
+	 * @throws InvalidMidiDataException
+	 */
+	public void updateSpeed(Integer value) throws InvalidMidiDataException {
+		speed = value;
+		ShortMessage msg = new ShortMessage();
+		msg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_SPEED, speed);
+		this.sendMsg(msg);
+	}
+
+	/**
+	 * Updates the time setting and sends message
+	 * 
+	 * @param value
+	 * @throws InvalidMidiDataException
+	 */
+	public void updateTime(Integer value) throws InvalidMidiDataException {
+		time = value;
+		ShortMessage msg = new ShortMessage();
+		msg.setMessage(ShortMessage.CONTROL_CHANGE, 0, Volante.CC_TIME, time);
+		this.sendMsg(msg);
+	}
+
 	public void stop() {
 		runMe = false;
 	}
